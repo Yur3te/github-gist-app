@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import gistsWrapper from "../js/gistsWrapper";
 const token = require("../js/config.js");
@@ -9,18 +9,30 @@ export default function AddGist() {
     return wrapper;
   };
 
-  const fileNameRef = useRef();
+  const [description, setDescription] = useState("");
+  const [filename, setFilename] = useState("");
+  const [content, setContent] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+
+  const descriptionHandler = (event) => setDescription(event.target.value);
+
+  const filenameHandler = (event) => setFilename(event.target.value);
+
+  const contentHandler = (event) => setContent(event.target.value);
+
+  const isPublicHandler = (event) => setIsPublic(event.target.checked);
 
   const create = (event) => {
-    const enteredFileName = fileNameRef.current.value;
     event.preventDefault();
 
-    const file = { name: enteredFileName, content: "test" };
-
     let gistPayload = {
-      description: "opis",
-      public: true,
-      files: { file },
+      description: description,
+      public: isPublic,
+      files: {
+        [filename]: {
+          content: content,
+        },
+      },
     };
 
     const wrapper = getWrapper();
@@ -30,6 +42,11 @@ export default function AddGist() {
       .catch((err) => {
         console.log(err);
       });
+
+    // dodać ifa - jeżeli jest response, że się udało to dopiero wtedy
+    setDescription("");
+    setFilename("");
+    setContent("");
   };
 
   return (
@@ -37,12 +54,24 @@ export default function AddGist() {
       <div>
         <form onSubmit={create}>
           <div>
-            <label>Nazwa pliku:</label>
-            <input type="text" ref={fileNameRef} />
+            <label>Opis: </label>
+            <input
+              type="text"
+              value={description}
+              onChange={descriptionHandler}
+            />
+          </div>
+          <div>
+            <label>Nazwa pliku: </label>
+            <input type="text" value={filename} onChange={filenameHandler} />
           </div>
           <div>
             <label>Treść:</label>
-            <input type="text" />
+            <input type="text" value={content} onChange={contentHandler} />
+          </div>
+          <div>
+            <label>Publiczne? </label>
+            <input type="checkbox" onChange={isPublicHandler} />
           </div>
           <input type="submit" value="Wyślij" />
         </form>
