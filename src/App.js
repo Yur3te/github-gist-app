@@ -1,5 +1,5 @@
 // import FirstComponent from "./components/component";
-import AddGist from "./components/AddGist";
+import AddGist from "./components/AddGist.jsx";
 
 
 

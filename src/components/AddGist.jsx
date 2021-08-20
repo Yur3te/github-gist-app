@@ -44,9 +44,11 @@ export default function AddGist() {
       });
 
     // dodać ifa - jeżeli jest response, że się udało to dopiero wtedy
+
     setDescription("");
     setFilename("");
     setContent("");
+    setIsPublic(false)
   };
 
   return (
@@ -55,11 +57,7 @@ export default function AddGist() {
         <form onSubmit={create}>
           <div>
             <label>Opis: </label>
-            <input
-              type="text"
-              value={description}
-              onChange={descriptionHandler}
-            />
+            <input type="text" value={description} onChange={descriptionHandler} />
           </div>
           <div>
             <label>Nazwa pliku: </label>
@@ -71,7 +69,7 @@ export default function AddGist() {
           </div>
           <div>
             <label>Publiczne? </label>
-            <input type="checkbox" onChange={isPublicHandler} />
+            <input type="checkbox" checked={isPublic} onChange={isPublicHandler} />
           </div>
           <input type="submit" value="Wyślij" />
         </form>
