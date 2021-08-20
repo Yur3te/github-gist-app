@@ -20,22 +20,25 @@ class gistsWrapper {
         return this.client.get(path)
       }
 
+      postRequest(path, payload) {
+        return this.client.post(path, payload)
+      }
       
       createGist(payload) {
         return this.postRequest('/gists', payload)
       }
     
 
-      postRequest(path, payload) {
-        return this.client.post(path, payload)
-      }
-    
       root() {
         return this.getRequest('/')
       }
     
       getGist(gistId) {
         return this.getRequest(`/gists/${gistId}`)
+      }
+
+      getAllGists() {
+        return this.getRequest('/gists')
       }
     }
 

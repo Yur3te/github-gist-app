@@ -4,7 +4,7 @@ import gistsWrapper from "../js/gistsWrapper";
 const token = require("../js/config.js");
 
 export default function AddGist() {
-  const getWrapper = function () {
+    const getWrapper = function () {
     const wrapper = new gistsWrapper(token);
     return wrapper;
   };

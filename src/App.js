@@ -1,5 +1,6 @@
 // import FirstComponent from "./components/component";
 import AddGist from "./components/AddGist.jsx";
+import GistListing from "./components/GistListing.jsx";
 
 
 
@@ -15,6 +16,7 @@ function App() {
       <div className="container">
         <div>Welcome into Githubwrapper</div>
         <AddGist/>
+        <GistListing/>
       </div>
     </div>
   );
