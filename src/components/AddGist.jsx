@@ -4,7 +4,7 @@ import gistsWrapper from "../js/gistsWrapper";
 const token = require("../js/config.js");
 
 export default function AddGist() {
-    const getWrapper = function () {
+  const getWrapper = function () {
     const wrapper = new gistsWrapper(token);
     return wrapper;
   };
@@ -38,17 +38,25 @@ export default function AddGist() {
     const wrapper = getWrapper();
     wrapper
       .createGist(gistPayload)
-      .then((response) => console.log(response.data))
-      .catch((err) => {
-        console.log(err);
+      .then((response) => {
+        console.log(response.data);
+        if (response.status === 201) {
+          console.log("SUKCES!");
+          setDescription("");
+          setFilename("");
+          setContent("");
+          setIsPublic(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("coś poszło nie tak");
+        if (error.response.status === 244) {
+          console.log("wpisz wszystko co potrzeba");
+        }
+        if (error.response.status === 401)
+          console.log("coś jest nie tak z tokenem");
       });
-
-    // dodać ifa - jeżeli jest response, że się udało to dopiero wtedy
-
-    setDescription("");
-    setFilename("");
-    setContent("");
-    setIsPublic(false)
   };
 
   return (
@@ -57,7 +65,11 @@ export default function AddGist() {
         <form onSubmit={create}>
           <div>
             <label>Opis: </label>
-            <input type="text" value={description} onChange={descriptionHandler} />
+            <input
+              type="text"
+              value={description}
+              onChange={descriptionHandler}
+            />
           </div>
           <div>
             <label>Nazwa pliku: </label>
@@ -69,7 +81,11 @@ export default function AddGist() {
           </div>
           <div>
             <label>Publiczne? </label>
-            <input type="checkbox" checked={isPublic} onChange={isPublicHandler} />
+            <input
+              type="checkbox"
+              checked={isPublic}
+              onChange={isPublicHandler}
+            />
           </div>
           <input type="submit" value="Wyślij" />
         </form>
