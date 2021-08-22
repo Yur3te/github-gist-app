@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import gistsWrapper from "../js/gistsWrapper";
-const token = require("../js/config.js");
+// const token = require("../js/config.js");
 
-export default function AddGist() {
+export default function AddGist(props) {
   const getWrapper = function () {
-    const wrapper = new gistsWrapper(token);
+    const wrapper = new gistsWrapper(props.token);
     return wrapper;
   };
 
@@ -60,8 +60,12 @@ export default function AddGist() {
   };
 
   return (
+
     <div>
       <div>
+        <div>
+          Create new Gist!
+        </div>
         <form onSubmit={create}>
           <div>
             <label>Opis: </label>

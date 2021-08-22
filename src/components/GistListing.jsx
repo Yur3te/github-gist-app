@@ -18,14 +18,17 @@ export default function GistListing() {
     const wrapper = getWrapper();
     const res = wrapper
       .getAllGists()
-      .then((response) => response.data)
+      .then((response) => setGists(response.data))
       .catch(() => []);
     setGists(res);
-    console.log(gists);
+    console.log(gists)
   };
 
   return (
     <div>
+      {/* {gists.map(gist => {
+        return <div key={gist.id}></div>
+      })} */}
       <button onClick={getListOfGists}>Get all new gists!</button>
     </div>
   );
