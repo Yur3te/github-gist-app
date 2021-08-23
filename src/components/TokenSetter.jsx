@@ -1,26 +1,59 @@
 //tak, wiem - na razie nie działa xDD
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const token = require("../js/config.js");
-
-export default function TokenSetter() {
+export default function TokenSetter(props) {
   const [enteredToken, setEnteredToken] = useState("");
+  // const [tokenLoaded, setTokenLoaded] = useState(false)
+ 
+  
 
-  const tokenHndler = (event) => setEnteredToken(event.target.value);
-
-  const defaultTokenSetter = () => {
-    setEnteredToken(token);
+  const tokenHandler = (event) => {
+    setEnteredToken(event.target.value);
+    // localStorage.setItem("token", enteredToken);
+    // props.setToken(event.target.value);
+    console.log("Token Handler");
+    // console.log(props.token);
+    // setEnteredToken(localStorage.getItem("token"))
+    // console.log(enteredToken)
   };
+
+
+  const saveToken = () => {
+    localStorage.setItem("token", enteredToken);
+    props.setToken(localStorage.getItem("token"))
+    console.log("save Token");
+    // props.setToken(token);
+    // setEnteredToken(token)
+    // console.log(props.token);
+    // props.createWrapper()
+  };
+
+  // useEffect(() => {
+  //   let tempToken = localStorage.getItem("token")
+  //   if(tempToken) {
+  //     props.setToken(localStorage.getItem("token"))
+  //   }
+  //   else {
+  //     console.log("token nie został jeszcze załadowany")
+  //   }
+  
+
+    // localStorage.setItem("token", enteredToken)
+    // let token = localStorage.getItem("token")
+    // props.setToken(token)
+    // console.log(token);
+    // props.setToken(localStorage.getItem("token"))
+  //   console.log("use Effect");
+  // })
+  // const defaultTokenSetter = () => {
+  //   setEnteredToken(props.token);
+
   return (
     <div>
       <label>Pls, Enter your token first: </label>
-      <input
-        type="password"
-        value={enteredToken}
-        onChange={tokenHndler}
-      ></input>
-      <button onClick={defaultTokenSetter}>Import from config file</button>
+      <input type="text" value={enteredToken} onChange={tokenHander}></input>
+      <button onClick={saveToken}>Zapisz token</button>
     </div>
   );
 }

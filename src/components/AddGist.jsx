@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
-import gistsWrapper from "../js/gistsWrapper";
-// const token = require("../js/config.js");
+// import gistsWrapper from "../js/gistsWrapper";
 
 export default function AddGist(props) {
-  const getWrapper = function () {
-    const wrapper = new gistsWrapper(props.token);
-    return wrapper;
-  };
+  // const getWrapper = function () {
+  //   const wrapper = new gistsWrapper(props.token);
+  //   return wrapper;
+  // };
 
   const [description, setDescription] = useState("");
   const [filename, setFilename] = useState("");
@@ -22,8 +21,9 @@ export default function AddGist(props) {
 
   const isPublicHandler = (event) => setIsPublic(event.target.checked);
 
-  const create = (event) => {
-    event.preventDefault();
+
+  
+  const create = () => {
 
     let gistPayload = {
       description: description,
@@ -34,12 +34,12 @@ export default function AddGist(props) {
         },
       },
     };
+    // const wrapper = getWrapper();
 
-    const wrapper = getWrapper();
-    wrapper
+    props.wrapper
       .createGist(gistPayload)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.status === 201) {
           console.log("SUKCES!");
           setDescription("");
@@ -50,7 +50,7 @@ export default function AddGist(props) {
       })
       .catch((error) => {
         console.log(error);
-        console.log("coś poszło nie tak");
+        // console.log("coś poszło nie tak");
         if (error.response.status === 244) {
           console.log("wpisz wszystko co potrzeba");
         }
@@ -84,7 +84,7 @@ export default function AddGist(props) {
             <input type="text" value={content} onChange={contentHandler} />
           </div>
           <div>
-            <label>Publiczne? </label>
+            <label>Wysłać jako Publiczne? </label>
             <input
               type="checkbox"
               checked={isPublic}

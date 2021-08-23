@@ -1,35 +1,41 @@
 import React, { useState } from "react";
 
 import gistsWrapper from "../js/gistsWrapper";
-const token = require("../js/config.js");
 
-
-
-
-export default function GistListing() {
+export default function GistListing(props) {
   const [gists, setGists] = useState([]);
 
   const getWrapper = function () {
-    const wrapper = new gistsWrapper(token);
+    const wrapper = new gistsWrapper(props.token);
     return wrapper;
   };
 
   const getListOfGists = () => {
     const wrapper = getWrapper();
-    const res = wrapper
+    // const res =
+    wrapper
       .getAllGists()
       .then((response) => setGists(response.data))
-      .catch(() => []);
-    setGists(res);
-    console.log(gists)
+      // .catch(() => []);
+    // setGists(res);
+    // console.log(gists)
+    console.log(gists.map((gist) => console.log(gist)));
+  };
+  const downloadedGists = () => {
+    gists.map((gist) => {
+      return <div url={gist.html_url} key={gist.id} />;
+    });
   };
 
   return (
     <div>
-      {/* {gists.map(gist => {
-        return <div key={gist.id}></div>
+      {/* {gists.map((gist) => {
+        return <div key={gist}></div>;
       })} */}
       <button onClick={getListOfGists}>Get all new gists!</button>
+      {gists.map((gist) => {
+        return <div url={gist.html_url} key={gist.id} />;
+      })}
     </div>
   );
 }
