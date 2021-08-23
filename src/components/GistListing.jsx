@@ -21,11 +21,11 @@ export default function GistListing(props) {
     // console.log(gists)
     console.log(gists.map((gist) => console.log(gist)));
   };
-  const downloadedGists = () => {
-    gists.map((gist) => {
-      return <div url={gist.html_url} key={gist.id} />;
-    });
-  };
+  // const downloadedGists = () => {
+  //   gists.map((gist) => {
+  //     return <div url={gist.html_url} key={gist.id} />;
+  //   });
+  // };
 
   return (
     <div>

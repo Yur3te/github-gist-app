@@ -4,65 +4,71 @@ import AddGist from "./components/AddGist.jsx";
 import GistListing from "./components/GistListing.jsx";
 import TokenSetter from "./components/TokenSetter.jsx";
 
-// import { token } from './config.json';
-// const reftreshToken = () => {
-//   const token = localStorage.getItem("token"
-// }
 import gistsWrapper from "./js/gistsWrapper";
 
 function App() {
-  const [token, setToken] = useState("")
-  const [wrapper, setWrapper] = useState(new gistsWrapper(""))
-  const [displayname, setDisplayname] = useState("")
-  
+  const [token, setToken] = useState("");
+  const [wrapper, setWrapper] = useState(new gistsWrapper(""));
+  const [login, setLogin] = useState("");
+
+  const [tokenLoaded, setTokenLoaded] = useState(false);
+
   const createWrapper = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const wrapper = new gistsWrapper(token)
-    wrapper.validate()
-    .then(response => {
-        setWrapper(wrapper)
-        setToken(localStorage.getItem("token"))
-        // setTokenIsCorrect(true)
-        // setDisplayname(response.data.name)
-        // setLogin(response.data.login)
-        // setTokenLoaded(true)
+    const wrapper = new gistsWrapper(token);
+    wrapper
+      .validate()
+      .then((response) => {
+        setWrapper(wrapper);
+        setLogin(response.data.login);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 401)
+          console.log("coś jest nie tak z tokenem");
+      });
+  };
 
-        // setCookie('token', token, 1)
+  useEffect(() => {
+    let tkn = localStorage.getItem("token");
+    if (tkn) {
+      const wrapper = new gistsWrapper(token);
+      wrapper
+        .validate()
+        .then((response) => {
+          setWrapper(wrapper);
+          setLogin(response.data.login);
+          console.log(response.data);
+          console.log("token załadowany z local storage");
+        })
+        .catch((error) => {
+          if (error.response.status === 401)
+            console.log("coś jest nie tak z tokenem");
+          setTokenLoaded(true);
+        });
+    } else setTokenLoaded(true);
 
-        // throwMessage('success', "Token is correct")
-    })
-    // .catch(error => {
-    //     if (error.response.status === 401)
-    //         throwMessage('failure', "Token is incorrect")
-    //     else if (error.response.status === 403)
-    //         throwMessage('failure', "API rate limit exceeded for this user")
-    // })
-  }
+    setToken(localStorage.getItem("token"));
+  }, [tokenLoaded]);
 
-  // useEffect(()=>
-  // {
-  //   const wrapper = new gistsWrapper(token)
-  //           wrapper.validate()
-  //           .then(response => {
-  //               setWrapper(wrapper)
-  //               setToken(localStorage.getItem("token"))
-  //           })
-  //         .catch(error => {
-  //           console.log("Nieprawidłowy Token")
-  //         })
-  // })
-  
+  // const testing = () => {
+  //   console.log(token);
+  // };
 
-
-  
   return (
     <div className="body">
       <div className="container">
-        <div>Welcome into Githubwrapper</div>
-        <TokenSetter token={token} setToken={setToken} createWrapper={createWrapper}/>
-        <AddGist token={token} wrapper={wrapper}/>
-        <GistListing token={token}/>
+        <div>Welcome {login} into Githubwrapper</div>
+        {/* <div>{displayname}</div> */}
+        <TokenSetter
+          token={token}
+          setToken={setToken}
+          createWrapper={createWrapper}
+        />
+        <AddGist wrapper={wrapper} createWrapper={createWrapper} />
+        <GistListing token={token} />
+        {/* <button onClick={testing}>TESTING TOKEN BUTTON</button> */}
       </div>
     </div>
   );

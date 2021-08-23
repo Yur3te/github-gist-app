@@ -21,10 +21,12 @@ export default function AddGist(props) {
 
   const isPublicHandler = (event) => setIsPublic(event.target.checked);
 
+  const create = (event) => {
+    event.preventDefault()
 
-  
-  const create = () => {
+    props.createWrapper(event)
 
+    
     let gistPayload = {
       description: description,
       public: isPublic,
@@ -50,22 +52,19 @@ export default function AddGist(props) {
       })
       .catch((error) => {
         console.log(error);
-        // console.log("coś poszło nie tak");
         if (error.response.status === 244) {
           console.log("wpisz wszystko co potrzeba");
         }
         if (error.response.status === 401)
           console.log("coś jest nie tak z tokenem");
+        else console.log("coś innego poszło nie tak");
       });
   };
 
   return (
-
     <div>
       <div>
-        <div>
-          Create new Gist!
-        </div>
+        <div>Create new Gist!</div>
         <form onSubmit={create}>
           <div>
             <label>Opis: </label>
@@ -91,7 +90,7 @@ export default function AddGist(props) {
               onChange={isPublicHandler}
             />
           </div>
-          <input type="submit" value="Wyślij" />
+          <input type="submit" value="Wyślij"/>
         </form>
       </div>
     </div>
