@@ -1,10 +1,7 @@
-//tak, wiem - na razie nie działa xDD
-
 import React, { useState, useEffect } from "react";
 
 export default function TokenSetter(props) {
   const [enteredToken, setEnteredToken] = useState("");
-  // const [tokenLoaded, setTokenLoaded] = useState(false)
 
   const tokenHandler = (event) => {
     setEnteredToken(event.target.value);
@@ -16,22 +13,29 @@ export default function TokenSetter(props) {
     console.log("Token Saved");
   };
 
+  const deleteToken = () => {
+    localStorage.removeItem("token");
+    props.setToken("");
+    console.log("Token Deleted");
+  };
+
   useEffect(() => {
     setEnteredToken(props.token);
   }, [props.token]);
 
   return (
     <div>
-      <label>Pls, Enter your token first: </label>
-      <input type="text" value={enteredToken} onChange={tokenHandler}></input>
-      <button
-        onClick={(event) => {
+      <form
+        onSubmit={(event) => {
           saveToken();
           props.createWrapper(event);
         }}
       >
-        Zapisz token
-      </button>
+        <label>Pls, Enter your token first: </label>
+        <input type="text" value={enteredToken} onChange={tokenHandler}></input>
+        <input type="submit" value="Zapisz token" />
+        <button onClick={deleteToken}>Usuń token</button>
+      </form>
     </div>
   );
 }
