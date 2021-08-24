@@ -12,6 +12,7 @@ function App() {
   const [login, setLogin] = useState("");
 
   const [tokenLoaded, setTokenLoaded] = useState(false);
+  const [tokenIsCorrect, setTokenIsCorrect] = useState(false)
 
   const createWrapper = (event) => {
     event.preventDefault();
@@ -22,6 +23,7 @@ function App() {
       .then((response) => {
         setWrapper(wrapper);
         setLogin(response.data.login);
+        setTokenIsCorrect(true)
         console.log(response.data);
       })
       .catch((error) => {
@@ -39,6 +41,7 @@ function App() {
         .then((response) => {
           setWrapper(wrapper);
           setLogin(response.data.login);
+          setTokenIsCorrect(true)
           console.log(response.data);
           console.log("token załadowany z local storage");
         })
@@ -52,23 +55,18 @@ function App() {
     setToken(localStorage.getItem("token"));
   }, [tokenLoaded]);
 
-  // const testing = () => {
-  //   console.log(token);
-  // };
-
   return (
     <div className="body">
       <div className="container">
-        <div>Welcome {login} into Githubwrapper</div>
-        {/* <div>{displayname}</div> */}
+        <div>Welcome into Githubwrapper!</div>
         <TokenSetter
           token={token}
           setToken={setToken}
           createWrapper={createWrapper}
         />
+        {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : null}
         <AddGist wrapper={wrapper} createWrapper={createWrapper} />
-        <GistListing token={token} />
-        {/* <button onClick={testing}>TESTING TOKEN BUTTON</button> */}
+        <GistListing wrapper={wrapper} createWrapper={createWrapper}/>
       </div>
     </div>
   );
