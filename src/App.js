@@ -28,32 +28,31 @@ function App() {
       })
       .catch((error) => {
         if (error.response.status === 401)
-          console.log("coś jest nie tak z tokenem");
+          console.log("coś jest nie tak z tokenem (From CreateWrapper)");
       });
   };
 
   useEffect(() => {
-    let tkn = localStorage.getItem("token");
-    if (tkn) {
-      const wrapper = new gistsWrapper(token);
-      wrapper
-        .validate()
-        .then((response) => {
-          setWrapper(wrapper);
-          setLogin(response.data.login);
-          setTokenIsCorrect(true)
-          console.log(response.data);
-          console.log("token załadowany z local storage");
-        })
-        .catch((error) => {
-          if (error.response.status === 401)
-            console.log("coś jest nie tak z tokenem");
-          setTokenLoaded(true);
-        });
-    } else setTokenLoaded(true);
-
-    setToken(localStorage.getItem("token"));
-  }, [tokenLoaded]);
+    setToken(localStorage.getItem("token"))
+    console.log("załadowany token:", token)
+    const wrapper = new gistsWrapper(token);
+    wrapper
+      .validate()
+      .then((response) => {
+        setWrapper(wrapper);
+        setLogin(response.data.login);
+        setTokenIsCorrect(true)
+        setToken()
+        console.log(response.data);
+        console.log("token załadowany z local storage");
+      })
+      .catch((error) => {
+        if (error.response.status === 401)
+          console.log("coś jest nie tak z tokenem (From useEffect)");
+          console.log("aktualny token: ",token)
+      });
+      setToken(localStorage.getItem("token"))
+  }, []);
 
   return (
     <div className="body">
@@ -64,7 +63,7 @@ function App() {
           setToken={setToken}
           createWrapper={createWrapper}
         />
-        {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : null}
+        {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : ""}
         <AddGist wrapper={wrapper} createWrapper={createWrapper} />
         <GistListing wrapper={wrapper} createWrapper={createWrapper}/>
       </div>

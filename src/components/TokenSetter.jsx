@@ -7,14 +7,15 @@ export default function TokenSetter(props) {
     setEnteredToken(event.target.value);
   };
 
-  const saveToken = () => {
+  const saveToken = (event) => {
     localStorage.setItem("token", enteredToken);
     props.setToken(localStorage.getItem("token"));
-    console.log("Token Saved");
+    console.log("Token Saved: ", props.token);
+    props.createWrapper(event)
   };
 
   const deleteToken = () => {
-    localStorage.removeItem("token");
+    localStorage.setItem("token", "");
     props.setToken("");
     console.log("Token Deleted");
   };
@@ -26,10 +27,7 @@ export default function TokenSetter(props) {
   return (
     <div>
       <form
-        onSubmit={(event) => {
-          saveToken();
-          props.createWrapper(event);
-        }}
+        onSubmit={saveToken}
       >
         <label>Pls, Enter your token first: </label>
         <input type="text" value={enteredToken} onChange={tokenHandler}></input>

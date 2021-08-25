@@ -9,9 +9,10 @@ export default function AddGist(props) {
   // };
 
   const [description, setDescription] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+
   const [filename, setFilename] = useState("");
   const [content, setContent] = useState("");
-  const [isPublic, setIsPublic] = useState(false);
 
   const descriptionHandler = (event) => setDescription(event.target.value);
 
@@ -56,7 +57,7 @@ export default function AddGist(props) {
           console.log("wpisz wszystko co potrzeba");
         }
         if (error.response.status === 401)
-          console.log("coś jest nie tak z tokenem");
+          console.log("coś jest nie tak z tokenem (from AddGist)");
         else console.log("coś innego poszło nie tak");
       });
   };
