@@ -29,8 +29,16 @@ class gistsWrapper {
     return this.getRequest("/");
   }
 
-  createGist(payload) {
-    return this.postRequest("/gists", payload);
+  // createGist(payload) {
+  //   return this.postRequest("/gists", payload);
+  // }
+
+  createGist(description, isPublic, files) {
+    return this.postRequest("/gists", {
+      description: description,
+      public: isPublic,
+      files: files,
+    });
   }
 
   getGist(gistId) {
