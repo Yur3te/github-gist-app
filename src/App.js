@@ -11,13 +11,14 @@ function App() {
   const [wrapper, setWrapper] = useState(new gistsWrapper(""));
   const [login, setLogin] = useState("");
 
-  const [tokenLoaded, setTokenLoaded] = useState(false);
+  // const [tokenLoaded, setTokenLoaded] = useState(false);
   const [tokenIsCorrect, setTokenIsCorrect] = useState(false)
 
   const createWrapper = (event) => {
     event.preventDefault();
-
+    
     const wrapper = new gistsWrapper(token);
+    if(token){
     wrapper
       .validate()
       .then((response) => {
@@ -27,14 +28,19 @@ function App() {
         console.log(response.data);
       })
       .catch((error) => {
-        if (error.response.status === 401)
-          console.log("coś jest nie tak z tokenem (From CreateWrapper)");
+        if (error.response.status === 401) console.log("coś jest nie tak z tokenem (From CreateWrapper)");
       });
+    } else console.log("token nie został jeszcze załadowany (createWrapper)")
   };
+
 
   useEffect(() => {
     setToken(localStorage.getItem("token"))
-    console.log("załadowany token:", token)
+  }, [])
+
+  useEffect(() => {
+    if(token){
+    // console.log("załadowany token:", token)
     const wrapper = new gistsWrapper(token);
     wrapper
       .validate()
@@ -42,7 +48,6 @@ function App() {
         setWrapper(wrapper);
         setLogin(response.data.login);
         setTokenIsCorrect(true)
-        setToken()
         console.log(response.data);
         console.log("token załadowany z local storage");
       })
@@ -51,8 +56,9 @@ function App() {
           console.log("coś jest nie tak z tokenem (From useEffect)");
           console.log("aktualny token: ",token)
       });
-      setToken(localStorage.getItem("token"))
-  }, []);
+      // setToken(localStorage.getItem("token"))
+    } else console.log("token nie został jeszcze załadowany (useEffect)")
+  }, [token]);
 
   return (
     <div className="body">
