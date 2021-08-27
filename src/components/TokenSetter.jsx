@@ -30,9 +30,9 @@ export default function TokenSetter(props) {
         onSubmit={saveToken}
       >
         <label>Pls, Enter your token first: </label>
-        <input type="text" value={enteredToken} onChange={tokenHandler}></input>
-        <input type="submit" value="Zapisz token" />
-        <button onClick={deleteToken}>Usuń token</button>
+        <input type="password" value={enteredToken} onChange={tokenHandler}></input>
+        <input type="submit" value="Save token" />
+        <button onClick={deleteToken}>Delete token</button>
       </form>
     </div>
   );
