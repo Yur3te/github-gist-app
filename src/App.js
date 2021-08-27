@@ -24,7 +24,7 @@ function App() {
       .then((response) => {
         setWrapper(wrapper);
         setLogin(response.data.login);
-        setTokenIsCorrect(true)
+        // setTokenIsCorrect(true)
         console.log(response.data);
       })
       .catch((error) => {
@@ -47,9 +47,9 @@ function App() {
       .then((response) => {
         setWrapper(wrapper);
         setLogin(response.data.login);
-        setTokenIsCorrect(true)
         console.log(response.data);
         console.log("token załadowany z local storage");
+        setTokenIsCorrect(true)
       })
       .catch((error) => {
         if (error.response.status === 401)
@@ -70,8 +70,8 @@ function App() {
           createWrapper={createWrapper}
         />
         {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : ""}
-        <AddGist wrapper={wrapper} createWrapper={createWrapper} />
-        <GistListing wrapper={wrapper} createWrapper={createWrapper}/>
+        <AddGist wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
+        <GistListing wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
       </div>
     </div>
   );
