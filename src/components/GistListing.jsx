@@ -59,7 +59,7 @@ export default function GistListing(props) {
         return(
           <div key={gist.id}>
             <div>{gist.description}</div>
-            {/* <button type={"button"} onClick={deleteGist(gist.id)}>X</button> */}
+            <button type={"button"} onClick={() => deleteGist(gist.id)}>X</button>
           </div>
         )
       })}
