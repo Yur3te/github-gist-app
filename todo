@@ -7,10 +7,10 @@ wygląd i układ strony
 
 funkcje wrappera:
 -dodawanie gist-ów (formularz)
--edycje gist-ów (formularz)
+-edycje gist-ów (formularz) <---
 -usuwanie gist-ów (akcja)
--listing gist-ów (paginacja)
--filtrowanie gist-ów (paginacja/filtrowanie)
+-listing gist-ów (paginacja) <--- 50/50
+-filtrowanie gist-ów (paginacja/filtrowanie) <---
 
 
 
