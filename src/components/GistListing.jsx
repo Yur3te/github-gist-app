@@ -38,7 +38,7 @@ export default function GistListing(props) {
   //   }
   // };
 
- 
+
 
   useEffect(() => {
     getListOfGists();
@@ -60,12 +60,13 @@ export default function GistListing(props) {
           return (
             <div key={gist.id}>
               <div>
-                {gist.description}
+                {/* {gist.description} */}
                 <Gist id={gist.id} wrapper={props.wrapper} tokenIsCorrect={props.tokenIsCorrect}/>
                 <button type={"button"} onClick={() => deleteGist(gist.id)}>
                   ^^^Delete gist above^^^
                 </button>
               </div>
+              <br/>
             </div>
           );
         })}
