@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Gist from "./Gist";
 
 export default function GistListing(props) {
   const [gists, setGists] = useState([]);
   // const [gistDeleted, setGistDeleted] = useState(false)
+  // const [files, setFiles] = useState([])
 
   const deleteGist = (id) => {
     props.wrapper.deleteGist(id).then((response) => {
@@ -13,32 +15,34 @@ export default function GistListing(props) {
     });
   };
 
-
   const getListOfGists = () => {
     if (props.tokenIsCorrect) {
       props.wrapper
         .getAllGists()
         .then((response) => {
           setGists(response.data);
+          console.log(response.data);
         })
         .catch(() => []);
     }
     console.log(gists.map((gist) => console.log(gist)));
   };
 
-  const getFiles = (id) => {
-    // ogólnie nie chce mi się tego teraz robić, ale
-    // mam taki pomysł by z listy gistów zajumać ich id
-    // i zroić request po pojedyńczy gist
-    // aby z tego zabrać wszystkie potrzebne dane jak content,
-    // filename i przede wszystkim pliki i potem je ustawić
-    // useState gist i setGist i potem lajlepiej po kliknięciu na dany gist
-    // pokazać te dane na jakiejś osoblen stronie (request z do pojedyńczego gista po kliknięciu)
-    //ale idk może jakoś łatwiej da się zrobić xd
-  }
+  // const getGistById = () => {
+  //   if(props.tokenIsCorrect) {
+  //     props.wrapper
+  //     .getGist("566ec8baf88867d18caec0675d5ba221")
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     });
+  //   }
+  // };
+
+ 
 
   useEffect(() => {
     getListOfGists();
+    // getGistById()
   }, [props.tokenIsCorrect]);
 
   // useEffect(()=>{
@@ -56,10 +60,10 @@ export default function GistListing(props) {
           return (
             <div key={gist.id}>
               <div>
-                {gist.description} 
-                {gist.files.content}
+                {gist.description}
+                <Gist id={gist.id} wrapper={props.wrapper} tokenIsCorrect={props.tokenIsCorrect}/>
                 <button type={"button"} onClick={() => deleteGist(gist.id)}>
-                  X
+                  ^^^Delete gist above^^^
                 </button>
               </div>
             </div>
