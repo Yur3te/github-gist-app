@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 export default function Gist(props) {
-  const [gist, setGist] = useState({});
-  const [files, setFiles] = useState([]);
+  const [gist, setGist] = useState();
+  // const [files, setFiles] = useState([]);
 
   useEffect(() => {
     // if (props.tokenIsCorrect) {
       props.wrapper.getGist(props.id).then((response) => {
         // setGist(response.data);
-        console.log(response.data);
+        // console.log(response.data);
 
         const files = [];
         Object.keys(response.data.files).forEach((key) => {
@@ -17,7 +17,7 @@ export default function Gist(props) {
             content: response.data.files[key].content,
           });
 
-          console.log(files)
+          // console.log(files)
           setGist({
             id: props.id,
             createdAt: response.data.created_at,
@@ -26,23 +26,27 @@ export default function Gist(props) {
             files: files,
           });
         });
+        // console.log(gist.files)
       });
     // }
   }, [
-    //   props.id, props.tokenIsCorrect, props.wrapper
+      props.id
+    // , props.tokenIsCorrect, props.wrapper
 ]);
 
-  if (gist)
-    return (
+  if (gist) {
+      return (
       <div>
         Description: {gist.description}
         {gist.files.map((file, index) => (
           <div key={index}>
+            File number {index+1}
             <div>Filename: {file.name}</div>
             <div>content: {file.content}</div>
+            <br />
           </div>
         ))}
       </div>
-    );
-  else <></>;
+    )}
+  else return <div></div>;
 }
