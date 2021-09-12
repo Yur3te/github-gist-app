@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import AddGist from "./components/AddGist.jsx";
 import GistListing from "./components/GistListing.jsx";
 import TokenSetter from "./components/TokenSetter.jsx";
+import Profile from "./components/Profile"
 
 import gistsWrapper from "./js/gistsWrapper";
 
 function App() {
   const [token, setToken] = useState("");
   const [wrapper, setWrapper] = useState(new gistsWrapper(""));
-  const [login, setLogin] = useState("");
 
   // const [tokenLoaded, setTokenLoaded] = useState(false);
   const [tokenIsCorrect, setTokenIsCorrect] = useState(false)
@@ -18,12 +18,13 @@ function App() {
     event.preventDefault();
     
     const wrapper = new gistsWrapper(token);
+    
     if(token){
     wrapper
       .validate()
       .then((response) => {
         setWrapper(wrapper);
-        setLogin(response.data.login);
+        // setLogin(response.data.login);
         // setTokenIsCorrect(true)
         console.log(response.data);
       })
@@ -42,11 +43,12 @@ function App() {
     if(token){
     // console.log("załadowany token:", token)
     const wrapper = new gistsWrapper(token);
+    console.log("Wrapper został stworzony!")
     wrapper
       .validate()
       .then((response) => {
         setWrapper(wrapper);
-        setLogin(response.data.login);
+        // setLogin(response.data.login);
         console.log(response.data);
         console.log("token załadowany z local storage");
         setTokenIsCorrect(true)
@@ -63,13 +65,8 @@ function App() {
   return (
     <div className="body">
       <div className="container">
-        <div>Welcome into Githubwrapper!</div>
-        <TokenSetter
-          token={token}
-          setToken={setToken}
-          createWrapper={createWrapper}
-        />
-        {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : ""}
+        <TokenSetter token={token} setToken={setToken} createWrapper={createWrapper}/>
+        <Profile wrapper={wrapper} tokenIsCorrect={tokenIsCorrect}/>
         <AddGist wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
         <GistListing wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
       </div>
@@ -78,3 +75,5 @@ function App() {
 }
 
 export default App;
+
+{/* {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : ""} */}
