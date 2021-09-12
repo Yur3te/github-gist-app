@@ -1,0 +1,61 @@
+.addgist {
+    width: 250px;
+    /* height: 520px; */
+    border: 5px solid var(--border-color);
+    /* border-color: ; */
+    border-radius: 0.6cm;
+    position: fixed;
+    padding: 0.6cm;
+    background: var(--main-color);
+    margin-left: 10cm;
+    /* float: left; */
+}
+
+.addgist input {
+    color:rgb(251, 255, 0);
+    background-color: var(--input-background);
+    width: 250px;
+    border-radius: 15px;
+    text-align: left;
+    padding: 5px;
+    margin-bottom: 0.15cm;
+}
+
+.addgist input[type="checkbox"] {
+    padding: 5px;
+    margin-left: -100px;
+}
+
+.addgist .button {
+    background-color: rgb(36, 120, 199);
+    color: white;
+    font-size: 15px;
+    border-color: rgb(253, 181, 247);
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 15px;
+    width: 70px;
+}
+
+.addgist textarea {
+    background-color: var(--input-background);
+    text-align: left;
+    padding: 5px;
+    width: 100%;
+    resize: vertical;
+    min-height: 200px;
+}
+
+.addgist .removefile {
+    color: red;
+    border-radius: 15px;
+    margin-left: 10px;
+}
+
+.addgist .addfile {
+    border-radius: 15px;
+    background-color: rgb(36, 120, 199);
+    color: white;
+    padding: 5px 10px;
+    /* TODO dać zmienne kolorów do przycisków */
+}
