@@ -1,19 +1,27 @@
+html {
+  --theme-color: #303031;
+  --font-color: #2bff00;
+  --border-color: #113175;
+  --main-color: #4d4949;
+  --theme-color2: #0b0e13;
+  --theme-color3: #8b8b8b;
+  --input-background: #5e3f3f;
+}
+
+
 body {
-    background-color: rgb(52, 49, 59);
+    background-color: var(--theme-color);
+    color: var(--font-color);
   }
 
-/* .container {
-  max-width: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  position: relative;
-  margin-top: 0px;
-  float: left;
-  font-size: 100px;
-}
- */
-
 .container {
+  margin-left: 50px;
+  margin-top: 50px;
+  /* color:rgb(59, 233, 74) */
+}
+
+
+/* .container {
   width: 90%;
   max-width: 1100px;
   margin-left: auto;
@@ -22,4 +30,9 @@ body {
   margin-top: 50px;
   color:rgb(59, 233, 74)
 }
-
+ */
+/* 
+ .test {
+  margin-left: 100px;
+  float: left
+} */
