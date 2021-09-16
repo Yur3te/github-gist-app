@@ -3,6 +3,14 @@ import React, { useState, useEffect } from "react";
 export default function Gist(props) {
   const [gist, setGist] = useState();
 
+  const deleteGist = (id) => {
+    props.wrapper.deleteGist(id).then((response) => {
+      if (response.status === 204) {
+        console.log("Gist has been deleted", id);
+      } else console.log(response.setatus);
+    });
+  };
+
 
   useEffect(() => {
     if (props.tokenIsCorrect) {
@@ -16,7 +24,6 @@ export default function Gist(props) {
                   content: response.data.files[key].content,
                 });
 
-                // console.log(files)
                 setGist({
                   id: props.id,
                   createdAt: response.data.created_at,
@@ -26,7 +33,6 @@ export default function Gist(props) {
                 });
               });
             }
-        // console.log(gist.files)
       });
     }
   }, [props.id, props.tokenIsCorrect, props.wrapper]);
@@ -49,10 +55,12 @@ export default function Gist(props) {
           <div key={index}>
             File number {index + 1}
             <div>Filename: {file.name}</div>
-            <div>content: {file.content}</div>
-            <br />
+            <div>content: {file.content}</div> <br/>
           </div>
         ))}
+        <button type={"button"} onClick={() => deleteGist(gist.id)}>
+            ^^^Delete gist above^^^
+        </button>
       </div>
     );
   } else return <div></div>;

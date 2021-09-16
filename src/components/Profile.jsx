@@ -18,13 +18,13 @@ export default function Profile(props) {
         setUrl(response.data.html_url);
       });
     }
-  }, [props.tokenIsCorrect]);
+  }, [props.tokenIsCorrect, props.wrapper]);
 
   if (props.tokenIsCorrect) {
     return (
       <div className="profile">
-        <a href={url} target="_blank">
-          <img className="image" src={avatar} />
+        <a href={url} target="_blank" rel="noreferrer">
+          <img className="image" alt="profile_picture" src={avatar} />
         </a>
         <div>Welcome {login}!</div>
         <div>Feel free to use this application!</div>
@@ -33,8 +33,8 @@ export default function Profile(props) {
   } else {
     return (
       <div className="content">
-        <div className="text">Token. Now.</div>
-        <img className="image" src={kanna} />
+        <div className="text">Token goes there</div>
+        <img className="image" alt="kanna" src={kanna} />
       </div>
     );
   }

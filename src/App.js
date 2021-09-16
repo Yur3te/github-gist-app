@@ -15,7 +15,6 @@ function App() {
 
   const [editingId, setEditingId] = useState()
 
-  // const [tokenLoaded, setTokenLoaded] = useState(false);
   const [tokenIsCorrect, setTokenIsCorrect] = useState(false)
 
   const createWrapper = (event) => {
@@ -28,14 +27,12 @@ function App() {
       .validate()
       .then((response) => {
         setWrapper(wrapper);
-        // setLogin(response.data.login);
-        // setTokenIsCorrect(true)
         console.log(response.data);
       })
       .catch((error) => {
-        if (error.response.status === 401) console.log("coś jest nie tak z tokenem (From CreateWrapper)");
+        if (error.response.status === 401) console.log("Something is wrong with token");
       });
-    } else console.log("token nie został jeszcze załadowany (createWrapper)")
+    } else console.log("Token hasn't been loaded")
   };
 
 
@@ -45,25 +42,22 @@ function App() {
 
   useEffect(() => {
     if(token){
-    // console.log("załadowany token:", token)
-    const wrapper = new gistsWrapper(token);
-    console.log("Wrapper został stworzony!")
-    wrapper
-      .validate()
-      .then((response) => {
-        setWrapper(wrapper);
-        // setLogin(response.data.login);
-        console.log(response.data);
-        console.log("token załadowany z local storage");
-        setTokenIsCorrect(true)
-      })
-      .catch((error) => {
-        if (error.response.status === 401)
-          console.log("coś jest nie tak z tokenem (From useEffect)");
-          console.log("aktualny token: ",token)
-      });
-      // setToken(localStorage.getItem("token"))
-    } else console.log("token nie został jeszcze załadowany (useEffect)")
+      const wrapper = new gistsWrapper(token);
+      console.log("Wrapper has been created!")
+      wrapper
+        .validate()
+        .then((response) => {
+          setWrapper(wrapper);
+          console.log(response.data);
+          console.log("token załadowany z local storage");
+          setTokenIsCorrect(true)
+        })
+        .catch((error) => {
+          if (error.response.status === 401)
+            console.log("coś jest nie tak z tokenem (From useEffect)");
+            console.log("aktualny token: ",token)
+        });
+      } else console.log("token nie został jeszcze załadowany (useEffect)")
   }, [token]);
 
   return (
@@ -80,5 +74,3 @@ function App() {
 }
 
 export default App;
-
-{/* {tokenIsCorrect ? <div>Hi {login}! Feel free to use this wrapper!</div> : ""} */}

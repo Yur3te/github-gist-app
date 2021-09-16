@@ -9,8 +9,6 @@ export default function EditGist(props) {
 
   const descriptionHandler = (event) => setDescription(event.target.value);
 
-  //   const isPublicHandler = (event) => setIsPublic(event.target.checked);
-
   const filenameHandler = (value, i) => {
     setFiles((files) =>
       files.map((item, index) =>
@@ -45,7 +43,6 @@ export default function EditGist(props) {
   useEffect(() => {
     if (props.editingId) {
       props.wrapper.getGist(props.editingId).then((response) => {
-        // console.log(response.data.files);
         const files = [];
         Object.keys(response.data.files).forEach((key) => {
           files.push({
@@ -53,12 +50,10 @@ export default function EditGist(props) {
             content: response.data.files[key].content,
           });
 
-          // console.log(files)
           setDescription(response.data.description);
           setFiles(files);
           setFilesBeforeUpdate(files);
         });
-        // console.log(gist.files)
       });
     }
   }, [props.editingId, props.wrapper]);
@@ -86,14 +81,13 @@ export default function EditGist(props) {
       }
     });
 
-    console.log("wysyłam: ", sendableFiles);
+    console.log("Sending: ", sendableFiles);
 
     props.wrapper
       .updateGist(props.editingId, description, sendableFiles)
       .then((response) => {
         if (response.status === 200) {
           console.log("Sukces! Gist has been updated");
-          setDescription("");
           setFiles("");
         }
       })
@@ -107,7 +101,7 @@ export default function EditGist(props) {
     return (
       <div className="editgist">
         {props.editingId}
-        <button onClick={() => props.setEditingId("")}>Cancel Edit</button>
+        <button onClick={() => setFiles("")}>Cancel Edit</button>
         <form onSubmit={update}>
           <div>
             <input
@@ -138,7 +132,6 @@ export default function EditGist(props) {
                         value={file.name}
                         onChange={(event) => filenameHandler(event.target.value, i)}
                       />
-                      {/* filename: {file.name} */}
                     </div>
                     <div>
                       <textarea

@@ -37,32 +37,6 @@ export default function AddGist(props) {
   const removeFile = (i) =>
     setFiles((files) => files.filter((value, index) => index !== i));
 
-  // const createTestingGists = (event) => {
-  //   event.preventDefault();
-
-  //   let filesPayload = {
-  //       "hello_world.rb": {
-  //         content:
-  //           'class HelloWorld\n   def initialize(name)\n      @name = name.capitalize\n   end\n   def sayHi\n      puts "Hello !"\n   end\nend\n\nhello = HelloWorld.new("World")\nhello.sayHi',
-  //       },
-  //       "hello_world.py": {
-  //         content:
-  //           'class HelloWorld:\n\n    def __init__(self, name):\n        self.name = name.capitalize()\n       \n    def sayHi(self):\n        print "Hello " + self.name + "!"\n\nhello = HelloWorld("world")\nhello.sayHi()',
-  //       },
-  //       "hello_world_ruby.txt": {
-  //         content: "Run `ruby hello_world.rb` to print Hello World",
-  //       },
-  //       "hello_world_python.txt": {
-  //         content: "Run `python hello_world.py` to print Hello World",
-  //       },
-  //   };
-    
-  //   for(let i = 0; i<5; i++){
-  //   props.wrapper
-  //     .createGist(`gist number ${i+1}`, false, filesPayload)
-  //     .then((response) => console.log(response));
-  //   }
-  // };
 
   const create = (event) => {
     event.preventDefault();
@@ -73,7 +47,7 @@ export default function AddGist(props) {
     files.forEach((value) => {
       sendableFiles[value.name] = { content: value.content };
     });
-    console.log("wysyłam: ", sendableFiles);
+    console.log("Sending: ", sendableFiles);
 
     props.wrapper
       .createGist(description, isPublic, sendableFiles)
@@ -94,7 +68,6 @@ export default function AddGist(props) {
   if(props.tokenIsCorrect) {
     return (
       <div className="addgist">
-        {/* <button onClick={createTestingGists}>Create 5 gists for testing!</button> */}
         <form onSubmit={create}> 
             <label>Create new Gist!</label>
           <div>
@@ -128,9 +101,6 @@ export default function AddGist(props) {
                     onChange={(event) => contentHandler(event.target.value, i)}
                   />
                 </div>
-                {/* <button type={"button"} onClick={() => removeFile(i)}>
-                  ⇈Remove file {i + 1}⇈
-                </button> */}
               </div>
             );
           })}

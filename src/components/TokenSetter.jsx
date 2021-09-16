@@ -29,7 +29,6 @@ export default function TokenSetter(props) {
   return (
     <div className="tokensetter">
       <form onSubmit={saveToken}>
-        {/* <label>Enter your token here: </label> */}
         <div>
           <input
             type="password"
