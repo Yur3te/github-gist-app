@@ -6,23 +6,26 @@ export default function Gist(props) {
 
   useEffect(() => {
     if (props.tokenIsCorrect) {
-      props.wrapper.getGist(props.id).then((response) => {
-        const files = [];
-        Object.keys(response.data.files).forEach((key) => {
-          files.push({
-            name: response.data.files[key].filename,
-            content: response.data.files[key].content,
-          });
+      props.wrapper.getGist(props.id)
+      .then((response) => {
+        if (response.status===200) {
+              const files = [];
+              Object.keys(response.data.files).forEach((key) => {
+                files.push({
+                  name: response.data.files[key].filename,
+                  content: response.data.files[key].content,
+                });
 
-          // console.log(files)
-          setGist({
-            id: props.id,
-            createdAt: response.data.created_at,
-            description: response.data.description,
-            isPublic: response.data.public,
-            files: files,
-          });
-        });
+                // console.log(files)
+                setGist({
+                  id: props.id,
+                  createdAt: response.data.created_at,
+                  description: response.data.description,
+                  isPublic: response.data.public,
+                  files: files,
+                });
+              });
+            }
         // console.log(gist.files)
       });
     }
