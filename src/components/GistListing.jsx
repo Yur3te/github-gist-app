@@ -5,6 +5,7 @@ import "./../style/gistlisting.css";
 
 export default function GistListing(props) {
   const [gists, setGists] = useState([]);
+  const [editingId, setEditingId] = useState()
   // const [gistDeleted, setGistDeleted] = useState(false)
   // const [files, setFiles] = useState([])
 
@@ -50,7 +51,9 @@ export default function GistListing(props) {
           return (
             <div key={gist.id}>
               <div>
-                <Gist id={gist.id} wrapper={props.wrapper} tokenIsCorrect={props.tokenIsCorrect}/>
+                {/* <button type="button" onClick={setEditingId(gist.id)}>Edit Gist</button> */}
+                  {/* {editingId} */}
+                <Gist setEditingId={props.setEditingId} id={gist.id} wrapper={props.wrapper} tokenIsCorrect={props.tokenIsCorrect}/>
                 <button type={"button"} onClick={() => deleteGist(gist.id)}>
                   ^^^Delete gist above^^^
                 </button>
