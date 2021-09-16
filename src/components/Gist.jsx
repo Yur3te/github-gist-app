@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import "./../style/gist.css";
+
 export default function Gist(props) {
   const [gist, setGist] = useState();
 
@@ -39,17 +41,17 @@ export default function Gist(props) {
 
   if (gist) {
     return (
-      <div>
+      <div className="gist">
         <div>
           Description: {gist.description}
-          <button type="button" onClick={() => props.setEditingId(gist.id)}>Edit Gist</button>
+          <button className="editbutton" type="button" onClick={() => props.setEditingId(gist.id)}>Edit</button>
         </div>
         <div>
           Public: {gist.isPublic ? "Yes" : "No"}
         </div>
         <div>
           Date of creation: {gist.createdAt}
-        </div>
+        </div> <br/>
         
         {gist.files.map((file, index) => (
           <div key={index}>
@@ -58,8 +60,8 @@ export default function Gist(props) {
             <div>content: {file.content}</div> <br/>
           </div>
         ))}
-        <button type={"button"} onClick={() => deleteGist(gist.id)}>
-            ^^^Delete gist above^^^
+        <button className="deletebutton" type={"button"} onClick={() => deleteGist(gist.id)}>
+            Delete Gist
         </button>
       </div>
     );

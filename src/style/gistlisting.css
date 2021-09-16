@@ -20,3 +20,8 @@
     border-radius: 15px;
     width: 200px;
 }
+
+.gistlisting button:hover {
+    background-color: rgb(44, 55, 209);
+}
+

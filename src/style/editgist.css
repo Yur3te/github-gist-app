@@ -8,3 +8,79 @@
     margin-top: -3cm;
     margin-bottom: 1cm;
 }
+
+.editgist input {
+    color:rgb(251, 255, 0);
+    background-color: var(--input-background);
+    width: 250px;
+    border-radius: 15px;
+    text-align: left;
+    padding: 5px;
+    margin-bottom: 0.15cm;
+}
+
+.editgist textarea {
+    background-color: var(--input-background);
+    text-align: left;
+    padding: 5px;
+    width: 100%;
+    resize: vertical;
+    min-height: 200px;
+    /* color: var(--font-color); */
+    color:rgb(251, 255, 0);
+}
+
+.editgist .removefile {
+    color: red;
+    border-radius: 15px;
+    margin-left: 10px;
+}
+
+.editgist .removefile:hover {
+    background-color: rgb(228, 190, 190);
+}
+
+
+.editgist .addfile {
+    border-radius: 15px;
+    background-color: rgb(36, 120, 199);
+    color: white;
+    border-color: rgb(253, 181, 247);
+    border-radius: 15px;
+    padding: 5px 10px;
+}
+
+.editgist .addfile:hover {
+    background-color: rgb(44, 55, 209);
+}
+
+
+.editgist .button {
+    background-color: rgb(36, 120, 199);
+    color: white;
+    font-size: 15px;
+    border-color: rgb(253, 181, 247);
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 15px;
+    width: 70px;
+}
+
+.editgist .button:hover {
+    background-color: rgb(44, 55, 209);
+}
+
+.editgist .cancelbutton {
+    background-color: rgb(36, 120, 199);
+    color: white;
+    font-size: 15px;
+    border-color: rgb(253, 181, 247);
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 15px;
+    width: 130px;
+}
+
+.editgist .cancelbutton:hover {
+    background-color: rgb(44, 55, 209);
+}

@@ -21,8 +21,9 @@
 }
 
 .addgist input[type="checkbox"] {
-    padding: 5px;
-    margin-left: -100px;
+    width: 1em;
+    height: 1em;
+    /* margin-left: -100px; */
 }
 
 .addgist .button {
@@ -34,6 +35,10 @@
     text-align: center;
     border-radius: 15px;
     width: 70px;
+}
+
+.addgist .button:hover {
+    background-color: rgb(44, 55, 209);
 }
 
 .addgist textarea {
@@ -53,10 +58,19 @@
     margin-left: 10px;
 }
 
+.addgist .removefile:hover {
+    background-color: rgb(228, 190, 190);
+}
+
 .addgist .addfile {
     border-radius: 15px;
     background-color: rgb(36, 120, 199);
     color: white;
+    border-color: rgb(253, 181, 247);
+    border-radius: 15px;
     padding: 5px 10px;
-    /* TODO dać zmienne kolorów do przycisków */
+}
+
+.addgist .addfile:hover {
+    background-color: rgb(44, 55, 209);
 }

@@ -1,0 +1,28 @@
+.gist {
+    color: rgb(0, 255, 179);
+    border: 3px solid var(--border-color);
+    margin: 10px;
+    border-radius: 0.4cm;
+    padding: 0.6cm;
+    background: var(--main-color);
+}
+
+.gist .editbutton {
+    background-color: rgb(36, 120, 199);
+    color: white;
+    font-size: 15px;
+    border-color: rgb(253, 181, 247);
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 15px;
+    width: 50px;
+    margin-left: 10px;
+}
+
+.gist .deletebutton {
+    background-color: rgb(173, 88, 77);
+}
+
+.gist .deletebutton:hover {
+    background-color: rgb(189, 42, 22);
+}
