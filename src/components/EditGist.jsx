@@ -49,11 +49,10 @@ export default function EditGist(props) {
             name: response.data.files[key].filename,
             content: response.data.files[key].content,
           });
-
-          setDescription(response.data.description);
-          setFiles(files);
-          setFilesBeforeUpdate(files);
         });
+        setDescription(response.data.description);
+        setFiles(files);
+        setFilesBeforeUpdate(files);
       });
     }
   }, [props.editingId, props.wrapper]);
@@ -100,8 +99,8 @@ export default function EditGist(props) {
   if (files) {
     return (
       <div className="editgist">
-        {props.editingId}
-        <button onClick={() => setFiles("")}>Cancel Edit</button>
+        Editing: {description}
+        <button className="cancelbutton" onClick={() => setFiles("")}>Cancel Edit</button>
         <form onSubmit={update}>
           <div>
             <input
@@ -115,32 +114,32 @@ export default function EditGist(props) {
           {files.map((file, i) => {
             return (
               <div key={i}>
-                {!file.deleted && <>
-                                
-                    <div>
-                      File number {i + 1}
-                      <button
-                        className="removefile"
-                        type={"button"}
-                        onClick={() => removeFile(i)}
-                      >X</button>
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        placeholder={"filename"}
-                        value={file.name}
-                        onChange={(event) => filenameHandler(event.target.value, i)}
-                      />
-                    </div>
-                    <div>
-                      <textarea
-                        type="text"
-                        placeholder={"content"}
-                        value={file.content}
-                        onChange={(event) => contentHandler(event.target.value, i)}
-                      />
-                    </div>
+                {!file.deleted &&
+                  <>
+                      <div>
+                        File number {i + 1}
+                        <button
+                          className="removefile"
+                          type={"button"}
+                          onClick={() => removeFile(i)}
+                        >X</button>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          placeholder={"filename"}
+                          value={file.name}
+                          onChange={(event) => filenameHandler(event.target.value, i)}
+                        />
+                      </div>
+                      <div>
+                        <textarea
+                          type="text"
+                          placeholder={"content"}
+                          value={file.content}
+                          onChange={(event) => contentHandler(event.target.value, i)}
+                        />
+                      </div>
                     </>
                     }
               </div>
@@ -150,7 +149,7 @@ export default function EditGist(props) {
             Add New file
           </button>
           <div>
-            <input type="submit" value="Submit" />
+            <input className="button" type="submit" value="Submit" />
           </div>
         </form>
       </div>
