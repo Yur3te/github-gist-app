@@ -28,13 +28,19 @@ export default function EditGist(props) {
   };
 
   const addFile = () => {
-    setFiles((files) => [...files].concat({ name: "", content: "" }));
+    setFiles((files) =>
+      [...files].concat({ name: "", content: "", deleted: false })
+    );
     console.log("file added");
     console.log(files);
   };
 
   const removeFile = (i) =>
-    setFiles((files) => files.filter((value, index) => index !== i));
+    setFiles((files) =>
+      files.map((item, index) =>
+        index === i ? { ...item, deleted: true } : item
+      )
+    );
 
   useEffect(() => {
     if (props.editingId) {
@@ -59,12 +65,27 @@ export default function EditGist(props) {
 
   const update = (event) => {
     event.preventDefault();
-    console.log(files)
+    console.log(files);
 
     let sendableFiles = {};
-    files.forEach((value) => {
-      sendableFiles[value.name] = { content: value.content, filename: value.name };
+    files.forEach((file, i) => {
+      if (file.deleted) {
+        if (i < filesBeforeUpdate.length)
+          sendableFiles[file.name] = { content: "" };
+      } else {
+        if (i < filesBeforeUpdate.length)
+          sendableFiles[filesBeforeUpdate[i].name] = {
+            content: file.content,
+            filename: file.name,
+          };
+      else
+        sendableFiles[file.name] = {
+          content: file.content,
+          filename: file.name,
+        };
+      }
     });
+
     console.log("wysyłam: ", sendableFiles);
 
     props.wrapper
@@ -73,6 +94,7 @@ export default function EditGist(props) {
         if (response.status === 200) {
           console.log("Sukces! Gist has been updated");
           setDescription("");
+          setFiles("");
         }
       })
       .catch((error) => {
@@ -92,37 +114,42 @@ export default function EditGist(props) {
               type="text"
               placeholder={"description"}
               value={description}
-              onChange={descriptionHandler}
-            />
+              onChange={descriptionHandler}/>
+
           </div>
-          {/* {console.log(files)} */}
+
           {files.map((file, i) => {
             return (
               <div key={i}>
-                <div>
-                  File number {i + 1}
-                  <button
-                    className="removefile"
-                    type={"button"}
-                    onClick={() => removeFile(i)}
-                  >X</button>
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    placeholder={"filename"}
-                    value={file.name}
-                    onChange={(event) => filenameHandler(event.target.value, i)}
-                  />
-                </div>
-                <div>
-                  <textarea
-                    type="text"
-                    placeholder={"content"}
-                    value={file.content}
-                    onChange={(event) => contentHandler(event.target.value, i)}
-                  />
-                </div>
+                {!file.deleted && <>
+                                
+                    <div>
+                      File number {i + 1}
+                      <button
+                        className="removefile"
+                        type={"button"}
+                        onClick={() => removeFile(i)}
+                      >X</button>
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={"filename"}
+                        value={file.name}
+                        onChange={(event) => filenameHandler(event.target.value, i)}
+                      />
+                      {/* filename: {file.name} */}
+                    </div>
+                    <div>
+                      <textarea
+                        type="text"
+                        placeholder={"content"}
+                        value={file.content}
+                        onChange={(event) => contentHandler(event.target.value, i)}
+                      />
+                    </div>
+                    </>
+                    }
               </div>
             );
           })}
