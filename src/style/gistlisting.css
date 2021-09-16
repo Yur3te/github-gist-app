@@ -1,15 +1,13 @@
 .gistlisting {
-    width: 550px;
-    /* height: 520px; */
+    width: 500px;
     border: 5px solid var(--border-color);
-    /* border-color: ; */
     border-radius: 0.6cm;
-    /* position: fixed; */
     padding: 0.6cm;
     background: var(--main-color);
     margin-left: 1cm;
-    margin-bottom: 10cm;
+    margin-bottom: 1cm;
     float: left;
+    margin-top: -3cm;
 }
 
 .gistlisting button {

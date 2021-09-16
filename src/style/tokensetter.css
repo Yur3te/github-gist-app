@@ -4,7 +4,6 @@
     border: 5px solid;
     border-color: var(--border-color);
     border-radius: 0.6cm;
-    position: fixed;
     padding: 0.6cm;
     background: var(--main-color);
 }

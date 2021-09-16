@@ -2,13 +2,11 @@
     width: 250px;
     height: 250px;
     border: 5px solid var(--border-color);
-    /* border-color: ; */
     border-radius: 0.6cm;
-    position: fixed;
     padding: 0.6cm;
     background: var(--main-color);
-    margin-top: 4cm;
-    /* float: left; */
+    margin-top: 1cm;
+    float: left;
 }
 
 
@@ -22,11 +20,11 @@
 
 .text {
     margin-left: 50px;
-    /* text-align: center; */
     color: rgb(204, 183, 186);
 }
 
 .image {
+    padding: 1px;
     display: block;
     width: 80%;
     margin-left: auto;

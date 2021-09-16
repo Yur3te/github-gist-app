@@ -1,13 +1,10 @@
 .editgist {
-    width: 550px;
-    /* height: 520px; */
+    width: 250px;
     border: 5px solid var(--border-color);
-    /* border-color: ; */
     border-radius: 0.6cm;
-    /* position: fixed; */
     padding: 0.6cm;
     background: var(--main-color);
-    margin-left: 36cm;
-    /* margin-bottom: 10cm; */
-    /* float: left; */
+    margin-left: 34cm;
+    margin-top: -3cm;
+    margin-bottom: 1cm;
 }
