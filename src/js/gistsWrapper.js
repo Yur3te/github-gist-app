@@ -29,6 +29,10 @@ class gistsWrapper {
     return this.getRequest("/");
   }
 
+  patchRequest(path, payload){
+    return this.client.patch(path, payload)
+  }
+
   // createGist(payload) {
   //   return this.postRequest("/gists", payload);
   // }
@@ -51,6 +55,14 @@ class gistsWrapper {
 
   getAllGists() {
     return this.getRequest("/gists");
+  }
+
+  updateGist(gistId, description, files) {
+    return this.patchRequest(`/gists/${gistId}`, {
+      description: description,
+      files: files
+    });
+
   }
 
   validate() {
