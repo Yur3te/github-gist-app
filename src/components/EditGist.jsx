@@ -63,7 +63,7 @@ export default function EditGist(props) {
 
     let sendableFiles = {};
     files.forEach((value) => {
-      sendableFiles[value.name] = { content: value.content };
+      sendableFiles[value.name] = { content: value.content, filename: value.name };
     });
     console.log("wysyłam: ", sendableFiles);
 
