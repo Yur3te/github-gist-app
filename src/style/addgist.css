@@ -4,11 +4,11 @@
     border: 5px solid var(--border-color);
     /* border-color: ; */
     border-radius: 0.6cm;
-    position: fixed;
+    /* position: fixed; */
     padding: 0.6cm;
     background: var(--main-color);
     margin-left: 10cm;
-    /* float: left; */
+    float: left;
 }
 
 .addgist input {
@@ -44,6 +44,8 @@
     width: 100%;
     resize: vertical;
     min-height: 200px;
+    /* color: var(--font-color); */
+    color:rgb(251, 255, 0);
 }
 
 .addgist .removefile {
