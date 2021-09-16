@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function Gist(props) {
   const [gist, setGist] = useState();
 
+
   useEffect(() => {
     if (props.tokenIsCorrect) {
       props.wrapper.getGist(props.id).then((response) => {
@@ -30,9 +31,17 @@ export default function Gist(props) {
   if (gist) {
     return (
       <div>
-        Description: {gist.description} <br />
-        Public: {gist.isPublic ? "Yes" : "No"} <br />
-        Date of creation: {gist.createdAt}
+        <div>
+          Description: {gist.description}
+          <button type="button" onClick={() => props.setEditingId(gist.id)}>Edit Gist</button>
+        </div>
+        <div>
+          Public: {gist.isPublic ? "Yes" : "No"}
+        </div>
+        <div>
+          Date of creation: {gist.createdAt}
+        </div>
+        
         {gist.files.map((file, index) => (
           <div key={index}>
             File number {index + 1}
