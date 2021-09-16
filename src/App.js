@@ -5,11 +5,15 @@ import GistListing from "./components/GistListing.jsx";
 import TokenSetter from "./components/TokenSetter.jsx";
 import Profile from "./components/Profile"
 
+
 import gistsWrapper from "./js/gistsWrapper";
+import EditGist from "./components/EditGist.jsx";
 
 function App() {
   const [token, setToken] = useState("");
   const [wrapper, setWrapper] = useState(new gistsWrapper(""));
+
+  const [editingId, setEditingId] = useState()
 
   // const [tokenLoaded, setTokenLoaded] = useState(false);
   const [tokenIsCorrect, setTokenIsCorrect] = useState(false)
@@ -68,7 +72,8 @@ function App() {
         <TokenSetter token={token} setToken={setToken} createWrapper={createWrapper}/>
         <Profile wrapper={wrapper} tokenIsCorrect={tokenIsCorrect}/>
         <AddGist wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
-        <GistListing wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
+        <GistListing setEditingId={setEditingId} wrapper={wrapper} createWrapper={createWrapper} tokenIsCorrect={tokenIsCorrect}/>
+        <EditGist editingId={editingId} setEditingId={setEditingId} wrapper={wrapper}/>
       </div>
     </div>
   );
