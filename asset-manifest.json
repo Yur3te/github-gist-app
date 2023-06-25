@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/github-gist-app/static/css/main.83f1c0f9.css",
+    "main.js": "/github-gist-app/static/js/main.1e48fbb6.js",
+    "static/media/tokenkanna.png": "/github-gist-app/static/media/tokenkanna.7b475ef3205e4e56b859.png",
+    "index.html": "/github-gist-app/index.html",
+    "main.83f1c0f9.css.map": "/github-gist-app/static/css/main.83f1c0f9.css.map",
+    "main.1e48fbb6.js.map": "/github-gist-app/static/js/main.1e48fbb6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.83f1c0f9.css",
+    "static/js/main.1e48fbb6.js"
+  ]
+}
